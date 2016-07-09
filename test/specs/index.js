@@ -7,7 +7,7 @@ import karmaMocha from 'karma-mocha';
 import karmaChai from 'karma-chai';
 import karmaPhantomjsLauncher from 'karma-phantomjs-launcher';
 import { revert, runKarma } from './helpers';
-import rollupPluginKarma from '../../dist/rollup-plugin-karma.js';
+import karmaRollupPlugin from '../../dist/rollup-plugin-karma.js';
 
 function run(files, options = {}) {
 
@@ -20,7 +20,7 @@ function run(files, options = {}) {
         preprocessors: {
             testFile: ['rollup']
         },
-        rollupPluginKarma: {
+        karmaRollupPlugin: {
             rollup: {
                 plugins: [
                     multiEntry(),
@@ -28,7 +28,7 @@ function run(files, options = {}) {
                 ]
             }
         },
-        plugins: [karmaMocha, karmaChai, karmaPhantomjsLauncher, rollupPluginKarma],
+        plugins: [karmaMocha, karmaChai, karmaPhantomjsLauncher, karmaRollupPlugin],
         reporters: ['progress'],
         port: 9876,
         colors: true,
@@ -41,9 +41,9 @@ function run(files, options = {}) {
 
 describe('rollup-plugin-karma', () => {
 
-    it('should exists', () => expect(rollupPluginKarma).to.exist);
+    it('should exists', () => expect(karmaRollupPlugin).to.exist);
 
-    it('should be an object', () => expect(rollupPluginKarma).to.be.an.object);
+    it('should be an object', () => expect(karmaRollupPlugin).to.be.an.object);
 
     it('should processes .js files', () => run('mocha.js'));
 
