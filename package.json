@@ -7,7 +7,8 @@
   "license": "MIT",
   "jsnext:main": "dist/karma-rollup-plugin.es.js",
   "scripts": {
-    "test": "mocha test/specs --recursive --compilers js:babel-register",
+    "test": "mocha",
+    "test1": "mocha test/specs --recursive --compilers js:buble-register",
     "build": "rollup -c",
     "prebuild": "rm -rf dist/*",
     "pretest": "npm run build",
@@ -36,12 +37,7 @@
    "debounce": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.10.1",
-    "babel-core": "^6.10.4",
-    "babel-eslint": "^6.1.1",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-register": "^6.9.0",
+    "buble": "^0.12.4",
     "chai": "^3.5.0",
     "eslint": "^3.0.1",
     "karma": "^1.1.1",

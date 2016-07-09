@@ -12,7 +12,7 @@ const touchParents = debounce(function() {
         fs.utimes(lst[idx], now, now);
     }
     changedParents.clear();
-}, WAIT)
+}, WAIT);
 
 function createPreprocessor(args, config = {}, logger, helper) {
 

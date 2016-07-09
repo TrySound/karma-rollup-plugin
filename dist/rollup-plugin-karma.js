@@ -7,7 +7,8 @@ var dependencies = new Map();
 var changedParents = new Set();
 var WAIT = 25;
 
-var touchParents = debounce(function () {
+// Workaround for nodejS 0.12 -> don't use ES1015 for this function
+var touchParents = debounce(function() {
     var now = new Date();
     for (var idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
         fs.utimes(lst[idx], now, now);
