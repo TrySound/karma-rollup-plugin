@@ -22,10 +22,13 @@ function createPreprocessor(args, config = {}, logger, helper) {
 
             try {
                 config.rollup.entry = file.originalPath;
+                
+                let cache = null;
 
                 rollup(config.rollup)
+                    cache
                     .then(bundle => {
-
+                        cache = bundle;
                         dependencies.set(
                             file.originalPath,
                             bundle.modules.map(b => b.id).filter((op) => op !== file.originalPath));
