@@ -1,8 +1,6 @@
 const path = require('path');
 const expect = require('chai').expect;
 const Server = require('karma').Server;
-const rollup = require('rollup').rollup;
-const multiEntry = require('rollup-plugin-multi-entry');
 const buble = require('rollup-plugin-buble');
 const karmaMocha = require('karma-mocha');
 const karmaChai = require('karma-chai');
@@ -12,14 +10,16 @@ const karmaRollupPlugin = require('../../dist/rollup-plugin-karma.js');
 /**
  * Helper functions
  */
-function revert(promise, reason = 'Unexpected resolved Promised') {
+function revert (promise, reason = 'Unexpected resolved Promised') {
     return promise.then(
-        () => { throw new Error(reason); },
+        () => { 
+          throw new Error(reason); 
+        },
         () => {}
     );
 }
 
-function runKarma(config) {
+function runKarma (config) {
     return new Promise((resolve, reject) => {
         new Server(config, exitCode => {
             if (exitCode) {
@@ -31,7 +31,7 @@ function runKarma(config) {
     });
 }
 
-function run(files, options = {}) {
+function run (files, options = {}) {
 
     const testFile = path.resolve('test/fixtures/' + files);
 
@@ -45,7 +45,6 @@ function run(files, options = {}) {
         karmaRollupPlugin: {
             rollup: {
                 plugins: [
-                    multiEntry(),
                     buble()
                 ]
             }
@@ -64,8 +63,7 @@ function run(files, options = {}) {
 /**
  * Tests
  */
-
-describe('rollup-plugin-karma', () => {
+describe('karma-rollup-plugin', () => {
 
     it('should exists', () => expect(karmaRollupPlugin).to.exist);
 
@@ -88,5 +86,4 @@ describe('rollup-plugin-karma', () => {
     it('should fail when a syntax error is found', () => revert(run(['error-syntax-error.js'])));
 
     it('should fail when an import is not found', () => revert(run(['error-import-not-found.js'])));
-
 });
