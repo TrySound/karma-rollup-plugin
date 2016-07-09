@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.0.7
+
+- refactored tests. Got rid of Babel
+
 ### 0.0.6
 
 - fixed nodeJS 0.12 issue

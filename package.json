@@ -1,6 +1,6 @@
 {
   "name": "karma-rollup-plugin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A Karma preprocessor plugin to offer seamless integration with Rollup",
   "main": "dist/karma-rollup-plugin.js",
   "author": "KFlash",
@@ -8,7 +8,6 @@
   "jsnext:main": "dist/karma-rollup-plugin.es.js",
   "scripts": {
     "test": "mocha",
-    "test1": "mocha test/specs --recursive --compilers js:buble-register",
     "build": "rollup -c",
     "prebuild": "rm -rf dist/*",
     "pretest": "npm run build",

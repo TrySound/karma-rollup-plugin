@@ -14,7 +14,7 @@ var touchParents = debounce(function() {
         fs.utimes(lst[idx], now, now);
     }
     changedParents.clear();
-}, WAIT)
+}, WAIT);
 
 function createPreprocessor(args, config, logger, helper) {
     if ( config === void 0 ) config = {};
