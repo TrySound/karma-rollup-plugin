@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.0.4
+
+- move rollup and debounce to regular dependencies
+
 ### 0.0.3
 
 - added support for nodeJS 0.12
