@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.0.3
+
+- added support for nodeJS 0.12
+- added cache
+
 ### 0.0.2
 
 - few fixes in the source
