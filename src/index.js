@@ -5,7 +5,7 @@ let dependencies = new Map();
 let changedParents = new Set();
 let WAIT = 25;
 
-const touchParents = debounce(() => {
+const touchParents = debounce(function() {
     let now = new Date();
     for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
         fs.utimes(lst[idx], now, now);
@@ -50,7 +50,7 @@ function createPreprocessor(args, config = {}, logger, helper) {
                                 log.debug(' \n%s depends on \n\t%s\n    Recompiling it.',
                                     parent, file.originalPath);
                                 changedParents.add(parent);
-                              //  touchParents();
+                              //  touchParents(changedParents);
                             }
                         }
 
