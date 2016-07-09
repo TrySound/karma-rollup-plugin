@@ -1,6 +1,6 @@
 {
   "name": "karma-rollup-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Karma preprocessor plugin to offer seamless integration with Rollup",
   "main": "dist/karma-rollup-plugin.js",
   "author": "KFlash",

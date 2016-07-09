@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.0.5
+
+- fixed issue [#6](https://github.com/Kflash/karma-rollup-plugin/issues/6). Credit: [brianmhunt](https://github.com/brianmhunt)
+- removed 'cache' code from source. Was always null.
+
 ### 0.0.4
 
 - move rollup and debounce to regular dependencies

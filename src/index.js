@@ -5,6 +5,14 @@ let dependencies = new Map();
 let changedParents = new Set();
 let WAIT = 25;
 
+const touchParents = debounce(() => {
+    let now = new Date();
+    for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
+        fs.utimes(lst[idx], now, now);
+    }
+    changedParents.clear();
+}, WAIT)
+
 function createPreprocessor(args, config = {}, logger, helper) {
 
     let log = logger.create('preprocessor.rollup');
@@ -22,17 +30,17 @@ function createPreprocessor(args, config = {}, logger, helper) {
 
             try {
                 config.rollup.entry = file.originalPath;
-                
-                let cache = null;
 
                 rollup(config.rollup)
-                    cache
                     .then(bundle => {
-                        cache = bundle;
+                        // Map this file to the dependencies that Rollup just
+                        // compiled.
                         dependencies.set(
                             file.originalPath,
                             bundle.modules.map(b => b.id).filter((op) => op !== file.originalPath));
-
+                        // Work backwards from dependencies to see what
+                        // relies on this file, then trigger a recompilation of
+                        // it.
                         for (let i = 0, list = dependencies.entries(); i < list.length; i += 1) {
                             let entry = list[i];
                             let parent = entry[0];
@@ -42,13 +50,7 @@ function createPreprocessor(args, config = {}, logger, helper) {
                                 log.debug(' \n%s depends on \n\t%s\n    Recompiling it.',
                                     parent, file.originalPath);
                                 changedParents.add(parent);
-                                debounce(() => {
-                                    let now = new Date();
-                                    for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
-                                        fs.utimes(lst[idx], now, now);
-                                    }
-                                    changedParents.clear();
-                                }, WAIT)();
+                                touchParents();
                             }
                         }
 
