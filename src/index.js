@@ -50,7 +50,7 @@ function createPreprocessor(args, config = {}, logger, helper) {
                                 log.debug(' \n%s depends on \n\t%s\n    Recompiling it.',
                                     parent, file.originalPath);
                                 changedParents.add(parent);
-                              //  touchParents(changedParents);
+                                touchParents();
                             }
                         }
 
