@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.0.6
+
+- fixed nodeJS 0.12 issue
+- updated NPM packages
+
 ### 0.0.5
 
 - fixed issue [#6](https://github.com/Kflash/karma-rollup-plugin/issues/6). Credit: [brianmhunt](https://github.com/brianmhunt)

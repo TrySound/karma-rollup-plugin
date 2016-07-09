@@ -5,6 +5,7 @@ let dependencies = new Map();
 let changedParents = new Set();
 let WAIT = 25;
 
+// Workaround for nodejS 0.12 -> don't use ES1015 for this function
 const touchParents = debounce(function() {
     let now = new Date();
     for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
