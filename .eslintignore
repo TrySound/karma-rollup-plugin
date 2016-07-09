@@ -1,0 +1,8 @@
+# We can probably lint these later but not important at this point
+dist/*
+node_modules/*
+**/node_modules/*
+config/**
+travis.yml
+build/
+coverage/

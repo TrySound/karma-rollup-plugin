@@ -18,10 +18,6 @@ export default {
         {
             format: 'cjs',
             dest: 'dist/rollup-plugin-karma.js'
-        },
-        {
-            format: 'es',
-            dest: 'dist/rollup-plugin-karma.es.js'
         }
     ]
 }

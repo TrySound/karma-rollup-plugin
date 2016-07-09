@@ -1,6 +1,6 @@
 {
   "name": "karma-rollup-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Karma preprocessor plugin to offer seamless integration with Rollup",
   "main": "dist/karma-rollup-plugin.js",
   "author": "KFlash",
@@ -10,7 +10,8 @@
     "test": "mocha test/specs --recursive --compilers js:babel-register",
     "build": "rollup -c",
     "prebuild": "rm -rf dist/*",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -33,11 +34,13 @@
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-register": "^6.9.0",
     "chai": "^3.5.0",
     "debounce": "^1.0.0",
+    "eslint": "^3.0.1",
     "karma": "^1.1.1",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^1.1.1",
