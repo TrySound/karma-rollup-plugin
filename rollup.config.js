@@ -3,17 +3,12 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
     entry: 'src/index.js',
-    plugins: [	nodeResolve({
-        jsnext: true,
-        main: true,
-    }),
-        buble({
-            transforms:
-            {
-                dangerousForOf: true
-            }
-
-        })],
+    plugins: [
+        nodeResolve({
+            jsnext: true,
+            main: true
+        }),
+        buble()],
     targets: [
         {
             format: 'cjs',

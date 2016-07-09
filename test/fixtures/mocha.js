@@ -16,7 +16,7 @@ describe("Mocha - 'to.be'", function() {
 });
 
 describe("Included matchers:", function() {
-    it("The 'to.be' matcher compares with ===", function() {
+    it("should compare the 'to.be' matcher with compares with ===", function() {
         const a = 12;
         const b = a;
         expect(a).to.eql(b);
@@ -25,7 +25,7 @@ describe("Included matchers:", function() {
 
     describe("The 'to.equal' matcher", function() {
 
-        it("works for simple literals and variables", function() {
+        it("should work for simple literals and variables", function() {
             const a = 12;
             expect(a).to.equal(12);
         });
@@ -45,16 +45,6 @@ describe("Included matchers:", function() {
             
             expect(foo).to.eql(bar);
         });
-    });
-
-    it("The 'to.be.true' matcher is for boolean casting testing", function() {
-        const a, foo = 'foo';
-        expect(a).not.to.be.true;
-    });
-
-    it("The 'to.be.false' matcher is for boolean casting testing", function() {
-        const a, foo = 'foo';
-        expect(foo).not.to.be.false;
     });
 
     it("The 'to.contain' matcher is for finding an item in an Array", function() {

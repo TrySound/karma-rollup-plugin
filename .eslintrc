@@ -1,0 +1,21 @@
+{
+    "root": true,
+    "rules": {
+        "semi": [ 2, "always" ],
+        "keyword-spacing": [ 2, { "before": true, "after": true } ],
+        "space-before-blocks": [ 2, "always" ],
+        "space-before-function-paren": [ 2, "always" ],
+        "no-mixed-spaces-and-tabs": [ 2, "smart-tabs" ],
+        "no-cond-assign": [ 0 ]
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "mocha": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    }
+}

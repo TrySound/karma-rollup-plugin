@@ -6,7 +6,7 @@ let changedParents = new Set();
 let WAIT = 25;
 
 // Workaround for nodejS 0.12 -> don't use ES1015 for this function
-const touchParents = debounce(function() {
+const touchParents = debounce ( function () {
     let now = new Date();
     for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
         fs.utimes(lst[idx], now, now);
@@ -14,7 +14,7 @@ const touchParents = debounce(function() {
     changedParents.clear();
 }, WAIT);
 
-function createPreprocessor(args, config = {}, logger, helper) {
+function createPreprocessor (args, config = {}, logger, helper) {
 
     let log = logger.create('preprocessor.rollup');
 

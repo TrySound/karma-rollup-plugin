@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.0.8
+
+- minor refactoring
+
 ### 0.0.7
 
 - refactored tests. Got rid of Babel
