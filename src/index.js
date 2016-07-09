@@ -5,7 +5,7 @@ let dependencies = new Map();
 let changedParents = new Set();
 let WAIT = 25;
 
-const touchParents = debounce(() => {
+const touchParents = debounce(function() {
     let now = new Date();
     for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
         fs.utimes(lst[idx], now, now);
