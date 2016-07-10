@@ -1,7 +1,5 @@
+node_modules
+dist
 .DS_Store
-/node_modules
-_actual
-coverage
 .commithash
 .idea
-bin/rollup
