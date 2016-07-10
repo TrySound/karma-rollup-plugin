@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.1.1
+
+- works for NodeJS 0.12, 4, 5, 6
+- refactoring
+- fixed a couple of bugs
+
+
 ### 0.1.0
 
 - serious bugs fixed
