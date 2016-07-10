@@ -1,9 +1,8 @@
-'use strict';
-let rollup = require('rollup');
-let debounce = require('debounce');
-let dependencies = new Map();
-let changedParents = new Set();
-let WAIT = 25;
+const rollup = require('rollup');
+const debounce = require('debounce');
+const dependencies = new Map();
+const changedParents = new Set();
+const WAIT = 25;
 
 const touchParents = debounce(function () {
     let now = new Date();
