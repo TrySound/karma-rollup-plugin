@@ -93,12 +93,16 @@ function createRollupPreprocessor (args, config, logger, helper) {
  * 
  * @param{Object} config - Config object
  */
-function createBundleOptions(config) {
+ function createBundleOptions(config) {
+        var bundleConfig = config.bundle || {}
+        
+        if (!bundleConfig.hasOwnProperty('format')) {
+               bundleConfig.format = 'es'; // set default to 'es'
+         }
 
-    if (!config.hasOwnProperty('rollup')) {
-        throw new Error('Rollup configuration is not found!');
+         // Bundle config options can be set here
+         return bundleConfig;
     }
-}
 
 /**
  * Rollup options. Other config options can be set here as well.
