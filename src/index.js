@@ -17,14 +17,18 @@ const touchParents = debounce(function () {
 // @param config {Object} - Config object of rollupPreprocessor.
 // @param logger {Object} - Karma's logger.
 // @helper helper {Object} - Karma's helper functions.
-function createPreprocessor (args, config, logger, helper) {
+function createRollupPreprocessor (args, config, logger, helper) {
     var log = logger.create('preprocessor.rollup');
     config = config || {};
-    var rollupConfig = config.rollup || {};
-    var bundleConfig = config.bundle || {};
-    function preprocess(content, file, done) {
-        log.debug('Processing "%s".', file.originalPath);
 
+    if (!config.rollup) {
+        throw new Error('Rollup configuration is not found!');
+      }
+    
+    var rollupConfig = config.rollup;
+    var bundleConfig = config.bundle || {};
+    
+    function preprocess(content, file, done) {
         log.debug('Processing "%s".', file.originalPath);
 
         try {
@@ -89,8 +93,8 @@ function createPreprocessor (args, config, logger, helper) {
     return preprocess;
 }
 
-createPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger', 'helper'];
+createRollupPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger', 'helper'];
 
 module.exports = {
-    'preprocessor:rollup': ['factory', createPreprocessor]
+    'preprocessor:rollup': ['factory', createRollupPreprocessor]
 };
