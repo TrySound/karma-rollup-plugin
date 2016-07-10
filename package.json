@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/Kflash/karma-rollup-plugin",
   "dependencies": {
-    "rollup": "^0.33.2",
+    "rollup": "^0.34.0",
    "debounce": "^1.0.0"
   },
   "devDependencies": {
