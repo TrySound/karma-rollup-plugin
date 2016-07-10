@@ -1,9 +1,10 @@
 'use strict';
 
-const rollup = require('rollup');
+const { rollup } = require('rollup');
 const debounce = require('debounce');
 const dependencies = new Map();
 const changedParents = new Set();
+const SOURCEMAPPING_URL = 'sourceMappingURL';
 const WAIT = 25;
 const touchParents = debounce(function () {
     const now = new Date();
@@ -11,11 +12,11 @@ const touchParents = debounce(function () {
         fs.utimes(parent, now, now);
     }
     changedParents.clear();
-}, WAIT)
+}, WAIT);
 
 /**
  * Main function
- * 
+ *
  * @param{Object} args  - Config object of custom preprocessor.
  * @param{Object} logger - Karma's logger.
  * @helper{Object} helper - Karma's helper functions.
@@ -27,25 +28,23 @@ function createRollupPreprocessor (args, config, logger, helper) {
     var rollupConfig = createRollupOptions(config);
     var bundleConfig = createBundleOptions(config);
 
-    function preprocess(content, file, done) {
+    function preprocess (content, file, done) {
         log.debug('Processing "%s".', file.originalPath);
 
         try {
             rollupConfig.entry = file.originalPath;
 
-            rollup
-                .rollup(rollupConfig)
-                .then(function (bundle)
-                {
+            rollup(rollupConfig)
+                .then(function (bundle) {
 
                     // Map this file to the dependencies that Rollup just
                     // compiled.
                     dependencies.set(
                         file.originalPath,
                         bundle.modules
-                            .map(function (b) { return b.id })
-                            .filter(function (op) {
-                                return op !== file.originalPath }))
+                            .map(b => b.id)
+                            .filter(op => op !== file.originalPath)
+                    );
 
                     // Work backwards from dependencies to see what
                     // relies on this file, then trigger a recompilation of
@@ -53,10 +52,9 @@ function createRollupPreprocessor (args, config, logger, helper) {
                     for (var i = 0, list = dependencies.entries(); i < list.length; i += 1) {
                         var entry = list[i];
                         var parent = entry[0];
-                        var dependList = entry[1]
+                        var dependList = entry[1];
                         if (dependList.includes(file.originalPath)) {
-                            log.debug(" \n%s depends on \n\t%s\n    Recompiling it.",
-                                parent, file.originalPath);
+                            log.debug(" \n%s depends on \n\t%s\n    Recompiling it.", parent, file.originalPath);
                             changedParents.add(parent);
                             touchParents();
                         }
@@ -67,15 +65,14 @@ function createRollupPreprocessor (args, config, logger, helper) {
 
                     if (bundleConfig.sourceMap === 'inline') {
                         var url = generated.map.toUrl();
-                        processed += "\n" + '//# sourceMappingURL=' + url;
+                        processed += '\n//# ' + SOURCEMAPPING_URL + '=' + url;
                     }
 
                     done(null, processed);
                 })
-                .catch(function (error)
-                {
+                .catch(function (error) {
                     log.error('%s\n at %s\n%s', e.message, file.originalPath, e.stack);
-                    done(error, null)
+                    done(error, null);
                 });
 
         }
@@ -90,32 +87,32 @@ function createRollupPreprocessor (args, config, logger, helper) {
 
 /**
  * Bundle options. Other config options can be set here as well.
- * 
+ *
  * @param{Object} config - Config object
  */
- function createBundleOptions(config) {
-        var bundleConfig = config.bundle || {}
-        
-        if (!bundleConfig.hasOwnProperty('format')) {
-               bundleConfig.format = 'es'; // set default to 'es'
-         }
+function createBundleOptions (config) {
+    var bundleConfig = config.bundle || {};
 
-         // Bundle config options can be set here
-         return bundleConfig;
+    if (!bundleConfig.hasOwnProperty('format')) {
+        bundleConfig.format = 'es'; // set default to 'es'
     }
+
+    // Bundle config options can be set here
+    return bundleConfig;
+}
 
 /**
  * Rollup options. Other config options can be set here as well.
- * 
+ *
  * @param{Object} config - Config object
  */
-function createRollupOptions(config) {
+function createRollupOptions (config) {
 
-    var rollupConfig = config.rollup || {}
+    var rollupConfig = config.rollup || {};
 
     // Rollup config options can be set here
 
-    return rollupConfig
+    return rollupConfig;
 }
 
 createRollupPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger', 'helper'];
