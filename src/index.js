@@ -21,13 +21,9 @@ function createRollupPreprocessor (args, config, logger, helper) {
     var log = logger.create('preprocessor.rollup');
     config = config || {};
 
-    if (!config.rollup) {
-        throw new Error('Rollup configuration is not found!');
-      }
-    
-    var rollupConfig = config.rollup;
-    var bundleConfig = config.bundle || {};
-    
+    var rollupConfig = createRollupOptions(config);;
+    var bundleConfig = createBundleOptions(config);
+
     function preprocess(content, file, done) {
         log.debug('Processing "%s".', file.originalPath);
 
@@ -63,10 +59,6 @@ function createRollupPreprocessor (args, config, logger, helper) {
                         }
                     }
 
-                    if (!bundleConfig.hasOwnProperty('format')) {
-                        bundleConfig.format = 'es';
-                    }
-
                     var generated = bundle.generate(bundleConfig);
                     var processed = generated.code;
 
@@ -91,6 +83,29 @@ function createRollupPreprocessor (args, config, logger, helper) {
     }
 
     return preprocess;
+}
+
+/**
+ * Bundle options
+ */
+function createBundleOptions(config) {
+
+    if (!config.hasOwnProperty('rollup')) {
+        throw new Error('Rollup configuration is not found!');
+    }
+}
+
+/**
+ * Rollup options
+ */
+
+function createRollupOptions(config) {
+
+    var rollupConfig = config.rollup || {}
+
+    // Rollup config options can be set here
+
+    return rollupConfig
 }
 
 createRollupPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger', 'helper'];
