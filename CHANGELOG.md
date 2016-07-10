@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.1.4
+
+- refactoring done by @TrySound.
+- fixed tests
+
+### 0.1.3
+
+- refactoring done by @TrySound.
+
 ### 0.1.1
 
 - works for NodeJS 0.12, 4, 5, 6
