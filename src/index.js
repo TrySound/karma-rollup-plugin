@@ -1,8 +1,18 @@
+ 'use strict';
+
 const rollup = require('rollup');
 const debounce = require('debounce');
 const dependencies = new Map();
 const changedParents = new Set();
 const WAIT = 25;
+
+// @param args {Object} - Config object of custom preprocessor.
+// @param config {Object} - Config object of rollupPreprocessor.
+// @param logger {Object} - Karma's logger.
+// @helper helper {Object} - Karma's helper functions.
+function createPreprocessor (args, config, logger, helper)
+{
+
 
 const touchParents = debounce(function () {
     let now = new Date();
@@ -12,18 +22,13 @@ const touchParents = debounce(function () {
     changedParents.clear();
 }, WAIT)
 
-// @param args {Object} - Config object of custom preprocessor.
-// @param config {Object} - Config object of rollupPreprocessor.
-// @param logger {Object} - Karma's logger.
-// @helper helper {Object} - Karma's helper functions.
-function createPreprocessor (args, config, logger, helper)
-{
     var log = logger.create('preprocessor.rollup');
 
     config = config || {};
 
     // Don't continue if there is no rollup configuration
     if (config.rollup) {
+    
         var rollupConfig = config.rollup || {};
         var bundleConfig = config.bundle || {};
 
