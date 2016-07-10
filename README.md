@@ -5,7 +5,7 @@
 
 > A Karma preprocessor plugin to offer seamless integration with [rollup](http://rollupjs.org/)
 
-This plugin is a Karma preprocessor mainly used to bundle your spec entry point but might be useful in other cases as well.
+This plugin is a Karma preprocessor to compile and bundle your spec entry point on the fly. It works seamless with all Rollup plugins.
 
 # Features
   
@@ -25,6 +25,8 @@ npm i karma-rollup-plugin --save-dev
 
 # Configuration
 
+See [Rollup documentation - JavaScript API](https://github.com/rollup/rollup/wiki/JavaScript-API) for more details.
+
 Following code shows the default configuration
 
 ```js
@@ -32,7 +34,7 @@ Following code shows the default configuration
 module.exports = function (config) {
   config.set({
     preprocessors: {
-      '**/**.js': ['rollup']
+     'test/**/*.js': ['rollup']
     },
     rollupPreprocessor: {
       // rollup settings. See Rollup documentation
@@ -51,10 +53,6 @@ module.exports = function (config) {
   });
 };
 ```
-
-For further reference
-
-- [Rollup documentation - JavaScript API](https://github.com/rollup/rollup/wiki/JavaScript-API)
 
 # Why this plugin?
 

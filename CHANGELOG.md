@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.1.0
+
+- serious bugs fixed
+- removed ES2015 code form source
+- added test for ES2015 class so we know transpilling works perfectly
+- updated Rollup to v.0.34.0
+
 ### 0.0.8
 
 - minor refactoring

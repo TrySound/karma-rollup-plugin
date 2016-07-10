@@ -5,15 +5,15 @@ const buble = require('rollup-plugin-buble');
 const karmaMocha = require('karma-mocha');
 const karmaChai = require('karma-chai');
 const karmaPhantomjsLauncher = require('karma-phantomjs-launcher');
-const karmaRollupPlugin = require('../../dist/rollup-plugin-karma.js');
+const karmaRollupPlugin = require('../../src/index.js');
 
 /**
  * Helper functions
  */
 function revert (promise, reason = 'Unexpected resolved Promised') {
     return promise.then(
-        () => { 
-          throw new Error(reason); 
+        () => {
+            throw new Error(reason);
         },
         () => {}
     );
@@ -69,21 +69,39 @@ describe('karma-rollup-plugin', () => {
 
     it('should be an object', () => expect(karmaRollupPlugin).to.be.an.object);
 
-    it('should processes .js files', () => run('mocha.js'));
+    it('should processes .js files', (done) => {
+        run('mocha.js');
+        done();
+    });
 
-    it('should processes .js files', () => run('karma.js'));
-
-    it('should generate source maps', () => run('karma.js', {
-        sourceMap: true
-    }));
-
-    it('should allow to include external paths', () => run(
-        'karma.js', {
-            includePaths: ['test//fixtures']
-        }
-    ));
+    it('should work perfectly with Mocha', (done) => {
+        run('karma.js', {sourceMap: true})
+        done();
+    });
 
     it('should fail when a syntax error is found', () => revert(run(['error-syntax-error.js'])));
 
     it('should fail when an import is not found', () => revert(run(['error-import-not-found.js'])));
+
+    /**
+     * ES2015 class so we know transpilling works
+     */
+    class Hello {
+        constructor(name) {
+            this.name = name;
+        }
+
+        say() {
+            return `Hello, ${this.name}!`;
+        }
+    }
+
+    it('should transpile ES2015 Class to ES5', () => {
+        const hello = new Hello('Rollup');
+
+        expect(hello.say()).to.equal('Hello, Rollup!');
+    });
+
+    // TODO! We should have tested generators, but this is only suppored in Babel, and not buble.
+    // Need to fix a workaround!
 });
