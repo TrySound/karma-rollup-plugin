@@ -13,15 +13,18 @@ const touchParents = debounce(function () {
     changedParents.clear();
 }, WAIT)
 
-// @param args {Object} - Config object of custom preprocessor.
-// @param config {Object} - Config object of rollupPreprocessor.
-// @param logger {Object} - Karma's logger.
-// @helper helper {Object} - Karma's helper functions.
+/**
+ * Main function
+ * 
+ * @param{Object} args  - Config object of custom preprocessor.
+ * @param{Object} logger - Karma's logger.
+ * @helper{Object} helper - Karma's helper functions.
+ */
 function createRollupPreprocessor (args, config, logger, helper) {
     var log = logger.create('preprocessor.rollup');
     config = config || {};
 
-    var rollupConfig = createRollupOptions(config);;
+    var rollupConfig = createRollupOptions(config);
     var bundleConfig = createBundleOptions(config);
 
     function preprocess(content, file, done) {
@@ -86,7 +89,9 @@ function createRollupPreprocessor (args, config, logger, helper) {
 }
 
 /**
- * Bundle options
+ * Bundle options. Other config options can be set here as well.
+ * 
+ * @param{Object} config - Config object
  */
 function createBundleOptions(config) {
 
@@ -96,9 +101,10 @@ function createBundleOptions(config) {
 }
 
 /**
- * Rollup options
+ * Rollup options. Other config options can be set here as well.
+ * 
+ * @param{Object} config - Config object
  */
-
 function createRollupOptions(config) {
 
     var rollupConfig = config.rollup || {}
