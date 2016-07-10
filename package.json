@@ -32,7 +32,7 @@
    "debounce": "^1.0.0"
   },
   "devDependencies": {
-    "buble": "^0.12.4",
+    "buble": "^0.12.5",
     "chai": "^3.5.0",
     "eslint": "^3.0.1",
     "karma": "^1.1.1",
