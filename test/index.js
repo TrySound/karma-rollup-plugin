@@ -71,7 +71,7 @@ function runFixture (fixture, options = {}) {
         bundle: assign({}, options.bundle)
     };
     const createPreprocessor = rollupPlugin['preprocessor:rollup'][1];
-    const preprocessor = createPreprocessor(config, loggerMock);
+    const preprocessor = createPreprocessor(null, config, loggerMock);
     const file = {
         originalPath: path.resolve(__dirname, 'fixtures/' + fixture)
     };
@@ -101,7 +101,7 @@ describe('karma-rollup-plugin', () => {
         expect(rollupPlugin['preprocessor:rollup'][1]).to.be.a.function;
     });
 
-  /*  it('should bundle es2015 modules', () => runFixture('module.js').then(code => {
+    it('should bundle es2015 modules', () => runFixture('module.js').then(code => {
         expect(code).to.not.contain('//# sourceMappingURL');
     }));
 
@@ -124,7 +124,7 @@ describe('karma-rollup-plugin', () => {
     }).then(code => {
         expect(code).to.contain('//# sourceMappingURL');
     }));
-*/
+
     // TODO: test karma specific stuff like watching dependency changes
     // touchParents function is weird and buggy
 });
