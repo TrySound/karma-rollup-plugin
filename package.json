@@ -1,8 +1,8 @@
 {
   "name": "karma-rollup-plugin",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "A Karma preprocessor plugin to offer seamless integration with Rollup",
-  "main": "dist/rollup-plugin-karma.js",
+  "main": "src/index.js",
   "author": "KFlash",
   "license": "MIT",
   "scripts": {
@@ -10,10 +10,10 @@
     "build": "rollup -c",
     "pretest": "npm run build",
     "test": "mocha",
-    "posttest": "npm run lint",
+    "posttesttt": "npm run lint",
     "prepublish": "npm test"
   },
-  "repository": {
+   "repository": {
     "type": "git",
     "url": "git@github.com:Kflash/karma-rollup-plugin.git"
   },

@@ -1,51 +1,52 @@
 'use strict';
 
-const { rollup } = require('rollup');
-const debounce = require('debounce');
-const dependencies = new Map();
-const changedParents = new Set();
-const SOURCEMAPPING_URL = 'sourceMappingURL';
-const WAIT = 25;
-const touchParents = debounce(() => {
-    const now = new Date();
-    for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
+var ref = require('rollup');
+var rollup = ref.rollup;
+var debounce = require('debounce');
+var dependencies = new Map();
+var changedParents = new Set();
+var SOURCEMAPPING_URL = 'sourceMappingURL';
+var WAIT = 25;
+var touchParents = debounce(function () {
+    var now = new Date();
+    for (var idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
         fs.utimes(parent, now, now);
     }
     changedParents.clear();
 }, WAIT);
 
-createRollupPreprocessor.$inject = ['config.rollupPlugin', 'logger'];
+function createRollupPreprocessor (args, config, logger, helper) {
+    config = config || {};
 
-function createRollupPreprocessor (config = {}, logger) {
-    const rollupConfig = config.rollup || {};
-    const bundleConfig = config.bundle || {};
-    const log = logger.create('preprocessor.rollup');
+     var rollupConfig = config.rollup || {};
+     var bundleConfig = config.bundle || {};
+     var log = logger.create('preprocessor.rollup');
 
-    return (content, file, done) => {
+    function preprocess (content, file, done) {
         log.debug('Processing "%s".', file.originalPath);
 
         try {
             rollupConfig.entry = file.originalPath;
 
             rollup(rollupConfig)
-                .then(bundle => {
+                .then(function (bundle) {
 
                     // Map this file to the dependencies that Rollup just
                     // compiled.
                     dependencies.set(
                         file.originalPath,
                         bundle.modules
-                            .map(b => b.id)
-                            .filter(op => op !== file.originalPath)
+                            .map(function (b) { return b.id; })
+                            .filter(function (op) { return op !== file.originalPath; })
                     );
 
                     // Work backwards from dependencies to see what
                     // relies on this file, then trigger a recompilation of
                     // it.
-                    for (let i = 0, list = dependencies.entries(); i < list.length; i += 1) {
-                        const entry = list[i];
-                        const parent = entry[0];
-                        const dependList = entry[1];
+                    for (var i = 0, list = dependencies.entries(); i < list.length; i += 1) {
+                        var entry = list[i];
+                        var parent = entry[0];
+                        var dependList = entry[1];
                         if (dependList.includes(file.originalPath)) {
                             log.debug(" \n%s depends on \n\t%s\n    Recompiling it.", parent, file.originalPath);
                             changedParents.add(parent);
@@ -53,7 +54,9 @@ function createRollupPreprocessor (config = {}, logger) {
                         }
                     }
 
-                    let { code, map } = bundle.generate(bundleConfig);
+                    var ref = bundle.generate(bundleConfig);
+                    var code = ref.code;
+                    var map = ref.map;
 
                     if (bundleConfig.sourceMap === 'inline') {
                         code += '\n//# ' + SOURCEMAPPING_URL + '=' + map.toUrl();
@@ -61,7 +64,7 @@ function createRollupPreprocessor (config = {}, logger) {
 
                     done(null, code);
                 })
-                .catch(error => {
+                .catch(function (error) {
                     log.error('%s\n at %s\n%s', error.message, file.originalPath, error.stack);
                     done(error);
                 });
@@ -71,8 +74,12 @@ function createRollupPreprocessor (config = {}, logger) {
             log.error('%s\n at %s', error.message, file.originalPath);
             done(error);
         }
-    };
+    }
+
+    return preprocess;
 }
+
+createRollupPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger', 'helper'];
 
 module.exports = {
     'preprocessor:rollup': ['factory', createRollupPreprocessor]
