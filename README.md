@@ -25,7 +25,7 @@ npm i karma-rollup-plugin --save-dev
 
 # Configuration
 
-See [Rollup documentation - JavaScript API](https://github.com/rollup/rollup/wiki/JavaScript-API) for more details.
+*Note!* As a rule of thumb, use of `iife` and `umd` format doesn't make sense in tests, and `umd` will throw an warning without a module name.
 
 Following code shows the default configuration
 
@@ -51,6 +51,8 @@ module.exports = function (config) {
   });
 };
 ```
+
+See [Rollup documentation - JavaScript API](https://github.com/rollup/rollup/wiki/JavaScript-API) for more details.
 
 # Why this plugin?
 

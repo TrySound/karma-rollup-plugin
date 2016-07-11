@@ -19,12 +19,6 @@ const touchParents = debounce(() => {
 function createRollupPreprocessor (args, options = {}, logger, helper) {
     let log = logger.create('preprocessor.rollup');
 
-    // Avoid Rollup from throwing "You must supply options.moduleName for UMD bundles"
-    // on 'UMD' format without module name
-    if (options.format === 'umd' && !options.moduleName) {
-        options.moduleName = pkg.name;
-    }
-
     return (content, file, done) => {
         log.debug('Processing "%s".', file.originalPath);
 
