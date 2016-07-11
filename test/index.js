@@ -91,9 +91,14 @@ function runFixture (fixture, options = {}) {
 describe('karma-rollup-plugin', () => {
 
     it('should be karma preprocessor', () => {
+        expect(rollupPlugin).to.exist;
         expect(rollupPlugin).to.be.an.object;
         expect(rollupPlugin['preprocessor:rollup']).to.be.an.array;
         expect(rollupPlugin['preprocessor:rollup'][1]).to.be.a.function;
+    });
+
+    it('should launch karma without issues', () => {
+        runServer('karma.js');
     });
 
     it('should bundle es2015 modules', () => runFixture('module.js').then(code => {
