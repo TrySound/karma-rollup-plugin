@@ -8,7 +8,7 @@ var changedParents = new Set();
 var SOURCEMAPPING_URL = 'sourceMappingURL';
 var WAIT = 25;
 var touchParents = debounce(function () {
-	var now = new Date();
+	var now = Date.now(); // gives better performance then new Date()
 	for (var idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
 		fs.utimes(parent, now, now);
 	}
@@ -16,7 +16,8 @@ var touchParents = debounce(function () {
 }, WAIT);
 
 function createRollupPreprocessor (args, config, logger, helper) {
-	config = config || {};
+	if ( config === void 0 ) config = {};
+
 
 	var rollupConfig = config.rollup || {};
 	var bundleConfig = config.bundle || {};

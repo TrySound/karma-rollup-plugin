@@ -7,15 +7,14 @@ const changedParents = new Set();
 const SOURCEMAPPING_URL = 'sourceMappingURL';
 const WAIT = 25;
 const touchParents = debounce(function () {
-	const now = new Date();
+	const now = Date.now(); // gives better performance then new Date()
 	for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
 		fs.utimes(parent, now, now);
 	}
 	changedParents.clear();
 }, WAIT);
 
-function createRollupPreprocessor (args, config, logger, helper) {
-	config = config || {};
+function createRollupPreprocessor (args, config = {}, logger, helper) {
 
 	let rollupConfig = config.rollup || {};
 	let bundleConfig = config.bundle || {};
