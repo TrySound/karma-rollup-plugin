@@ -10,7 +10,7 @@
     "build": "rollup -c",
     "pretest": "npm run build",
     "test": "mocha",
-    "posttesttt": "npm run lint",
+    "posttest": "npm run lint",
     "prepublish": "npm test"
   },
    "repository": {
