@@ -5,6 +5,7 @@ const debounce = require('debounce');
 const dependencies = new Map();
 const changedParents = new Set();
 const SOURCEMAPPING_URL = 'sourceMappingURL';
+const pkg = JSON.parse( readFileSync( 'package.json', 'utf-8' ) );
 const WAIT = 25;
 const touchParents = debounce(() => {
     const now = Date.now(); // gives better performance then new Date()
@@ -17,6 +18,12 @@ const touchParents = debounce(() => {
 function createRollupPreprocessor (args, options = {}, logger, helper) {
     let log = logger.create('preprocessor.rollup');
 
+    // Avoid Rollup from throwing "You must supply options.moduleName for UMD bundles"
+    // on 'UMD' format without module name
+    if (options.format === 'umd' && !options.moduleName) {
+        options.moduleName = pkg.name;
+    }
+    
     // Avoid deprecation warning 
     if (options.format === 'es6') {
         options.format = 'es';
