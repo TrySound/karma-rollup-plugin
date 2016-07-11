@@ -24,11 +24,6 @@ function createRollupPreprocessor (args, options = {}, logger, helper) {
     if (options.format === 'umd' && !options.moduleName) {
         options.moduleName = pkg.name;
     }
-    
-    // Avoid deprecation warning 
-    if (options.format === 'es6') {
-        options.format = 'es';
-    }
 
     return (content, file, done) => {
         log.debug('Processing "%s".', file.originalPath);

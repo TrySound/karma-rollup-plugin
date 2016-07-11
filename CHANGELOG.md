@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.1.11
+
+- fixed issue where UMD format was set without module name. 
+- added tests
+
 ### 0.1.9
 
 - BC! Merged Rolup and Bundle options into one. The preprocessor now works like Rollup
