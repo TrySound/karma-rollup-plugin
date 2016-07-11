@@ -17,6 +17,11 @@ const touchParents = debounce(() => {
 function createRollupPreprocessor (args, options = {}, logger, helper) {
     let log = logger.create('preprocessor.rollup');
 
+    // Avoid deprecation warning 
+    if (options.format === 'es6') {
+       options.format = 'es';
+    }
+
     return (content, file, done) => {
         log.debug('Processing "%s".', file.originalPath);
 
