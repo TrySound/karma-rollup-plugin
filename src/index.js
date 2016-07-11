@@ -14,19 +14,16 @@ const touchParents = debounce(() => {
     changedParents.clear();
 }, WAIT);
 
-function createRollupPreprocessor (args, config = {}, logger, helper) {
-
-    let rollupConfig = config.rollup || {};
-    let bundleConfig = config.bundle || {};
+function createRollupPreprocessor (args, options = {}, logger, helper) {
     let log = logger.create('preprocessor.rollup');
 
     return (content, file, done) => {
         log.debug('Processing "%s".', file.originalPath);
 
         try {
-            rollupConfig.entry = file.originalPath;
+            options.entry = file.originalPath;
 
-            rollup(rollupConfig)
+            rollup(options)
                 .then(bundle => {
 
                     // Map this file to the dependencies that Rollup just
@@ -52,9 +49,9 @@ function createRollupPreprocessor (args, config = {}, logger, helper) {
                         }
                     }
 
-                    let { code, map } = bundle.generate(bundleConfig);
+                    let { code, map } = bundle.generate(options);
 
-                    if (bundleConfig.sourceMap === 'inline') {
+                    if (options.sourceMap === 'inline') {
                         code += '\n//# ' + SOURCEMAPPING_URL + '=' + map.toUrl();
                     }
 

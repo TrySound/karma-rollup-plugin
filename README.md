@@ -38,17 +38,13 @@ module.exports = function (config) {
     },
     rollupPreprocessor: {
       // rollup settings. See Rollup documentation
-      rollup: {
-        plugins: [
-          multiEntry(), // Allows specifying multiple entry points with rollup.
-          buble() // ES2015 compiler by the same author as Rollup
-            ]
-          })
-        ]
-      },
-      bundle: {
-        sourceMap: 'inline'
-      }
+      plugins: [
+        multiEntry(), // Allows specifying multiple entry points with rollup.
+        buble() // ES2015 compiler by the same author as Rollup
+          ]
+        })
+      ],
+      sourceMap: 'inline'
     }
   });
 };
