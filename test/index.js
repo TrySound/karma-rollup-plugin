@@ -43,12 +43,10 @@ function runServer (file, options = {}) {
         preprocessors: {
             'fixtures/**': ['rollup']
         },
-        rollupPlugin: {
-            rollup: {
-                plugins: [
-                    buble()
-                ]
-            }
+        rollupPreprocessor: {
+            plugins: [
+                buble()
+            ]
         },
         autoWatch: false,
         singleRun: true
@@ -62,16 +60,13 @@ function runFixture (fixture, options = {}) {
             error: () => {}
         })
     };
-    const config = {
-        rollup: assign({
-            plugins: [
-                buble()
-            ]
-        }, options.rollup),
-        bundle: assign({}, options.bundle)
+    const defaults = {
+        plugins: [
+            buble()
+        ]
     };
     const createPreprocessor = rollupPlugin['preprocessor:rollup'][1];
-    const preprocessor = createPreprocessor(null, config, loggerMock);
+    const preprocessor = createPreprocessor(null, assign(defaults, options), loggerMock);
     const file = {
         originalPath: path.resolve(__dirname, 'fixtures/' + fixture)
     };
@@ -118,9 +113,7 @@ describe('karma-rollup-plugin', () => {
     }));
 
     it('should add inline source map', () => runFixture('es2015.js', {
-        bundle: {
-            sourceMap: 'inline'
-        }
+        sourceMap: 'inline'
     }).then(code => {
         expect(code).to.contain('//# sourceMappingURL');
     }));
