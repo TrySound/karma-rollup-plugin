@@ -1,8 +1,14 @@
 # Changelog
 
+### 0.1.9
+
+- BC! Merged Rolup and Bundle options into one. The preprocessor now works like Rollup
+- fixed linting issues
+- cleanup
+
 ### 0.1.7
 
-- cleaned up the source cdoe
+- cleaned up the source code
 
 ### 0.1.6
 
