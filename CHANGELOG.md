@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.1.7
+
+- cleaned up the source cdoe
+
+### 0.1.6
+
+- fixed issures where the code doesn't work at all
+
 ### 0.1.4
 
 - refactoring done by @TrySound.

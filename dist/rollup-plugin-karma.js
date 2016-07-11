@@ -1,14 +1,15 @@
 'use strict';
 
-const { rollup } = require('rollup');
-const debounce = require('debounce');
-const dependencies = new Map();
-const changedParents = new Set();
-const SOURCEMAPPING_URL = 'sourceMappingURL';
-const WAIT = 25;
-const touchParents = debounce(function () {
-	const now = new Date();
-	for (let idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
+var ref = require('rollup');
+var rollup = ref.rollup;
+var debounce = require('debounce');
+var dependencies = new Map();
+var changedParents = new Set();
+var SOURCEMAPPING_URL = 'sourceMappingURL';
+var WAIT = 25;
+var touchParents = debounce(function () {
+	var now = new Date();
+	for (var idx = 0, lst = changedParents.values(); idx < lst.length; idx += 1) {
 		fs.utimes(parent, now, now);
 	}
 	changedParents.clear();
@@ -17,11 +18,11 @@ const touchParents = debounce(function () {
 function createRollupPreprocessor (args, config, logger, helper) {
 	config = config || {};
 
-	let rollupConfig = config.rollup || {};
-	let bundleConfig = config.bundle || {};
-	let log = logger.create('preprocessor.rollup');
+	var rollupConfig = config.rollup || {};
+	var bundleConfig = config.bundle || {};
+	var log = logger.create('preprocessor.rollup');
 
-	return (content, file, done) => {
+	return function (content, file, done) {
 		log.debug('Processing "%s".', file.originalPath);
 
 		try {
@@ -35,17 +36,17 @@ function createRollupPreprocessor (args, config, logger, helper) {
 					dependencies.set(
 						file.originalPath,
 						bundle.modules
-							.map(b => b.id)
-							.filter(op => op !== file.originalPath)
+							.map(function (b) { return b.id; })
+							.filter(function (op) { return op !== file.originalPath; })
 					);
 
 					// Work backwards from dependencies to see what
 					// relies on this file, then trigger a recompilation of
 					// it.
-					for (let i = 0, list = dependencies.entries(); i < list.length; i += 1) {
-						const entry = list[i];
-						const parent = entry[0];
-						const dependList = entry[1];
+					for (var i = 0, list = dependencies.entries(); i < list.length; i += 1) {
+						var entry = list[i];
+						var parent = entry[0];
+						var dependList = entry[1];
 						if (dependList.includes(file.originalPath)) {
 							log.debug(" \n%s depends on \n\t%s\n    Recompiling it.", parent, file.originalPath);
 							changedParents.add(parent);
@@ -53,7 +54,9 @@ function createRollupPreprocessor (args, config, logger, helper) {
 						}
 					}
 
-					let { code, map } = bundle.generate(bundleConfig);
+					var ref = bundle.generate(bundleConfig);
+					var code = ref.code;
+					var map = ref.map;
 
 					if (bundleConfig.sourceMap === 'inline') {
 						code += '\n//# ' + SOURCEMAPPING_URL + '=' + map.toUrl();
