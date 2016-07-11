@@ -19,7 +19,7 @@ function createRollupPreprocessor (args, options = {}, logger, helper) {
 
     // Avoid deprecation warning 
     if (options.format === 'es6') {
-       options.format = 'es';
+        options.format = 'es';
     }
 
     return (content, file, done) => {

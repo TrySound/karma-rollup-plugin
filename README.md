@@ -44,6 +44,8 @@ module.exports = function (config) {
           ]
         })
       ],
+      intro: '(function() {',
+      outro: '})();',
       sourceMap: 'inline'
     }
   });
