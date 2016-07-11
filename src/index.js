@@ -1,6 +1,7 @@
 'use strict';
 
 const { rollup } = require('rollup');
+const { readFileSync } = require('fs');
 const debounce = require('debounce');
 const dependencies = new Map();
 const changedParents = new Set();
