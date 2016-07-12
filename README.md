@@ -13,7 +13,7 @@ This plugin is a Karma preprocessor to compile and bundle your spec entry point 
   - supports both Babel and Buble as the ES2015 compiler
   - sourceMap
   - recompiling of dependencies when files changes
-  - ES3, ES5, ES2015, ES2016, and ES2017 (*with Babel*)
+  - ES3, ES5, ES2015, ES2016, and ES2017 (*with Babel or Buble*)
 
 # Installation
 
@@ -25,7 +25,7 @@ npm i karma-rollup-plugin --save-dev
 
 # Configuration
 
-*Note!* As a rule of thumb, use of `iife` and `umd` format doesn't make sense in tests, and `umd` will throw an warning without a module name.
+*Note!* As a rule of thumb, use of `umd` format doesn't make sense in tests, and will throw a warning without a module name.
 
 Following code shows the default configuration
 
@@ -39,13 +39,10 @@ module.exports = function (config) {
     rollupPreprocessor: {
       // rollup settings. See Rollup documentation
       plugins: [
-        multiEntry(), // Allows specifying multiple entry points with rollup.
         buble() // ES2015 compiler by the same author as Rollup
-          ]
-        })
       ],
-      intro: '(function() {',
-      outro: '})();',
+      // will help to prevent conflicts between different tests entries
+      format: 'iife',
       sourceMap: 'inline'
     }
   });
