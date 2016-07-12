@@ -1,2 +1,3 @@
 test/*.js
 --compilers js:buble/register
+--timeout 3000

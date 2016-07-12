@@ -11,16 +11,6 @@ const rollupPlugin = require('../');
 /**
  * Helper functions
  */
-function revert (promise, reason = 'Unexpected resolved Promised') {
-    return promise
-        .then(
-            () => {
-                throw new Error(reason);
-            },
-            () => {}
-        );
-}
-
 function runKarma (config) {
     return new Promise((resolve, reject) => {
         new Server(config, exitCode => {
@@ -33,7 +23,7 @@ function runKarma (config) {
     });
 }
 
-function runServer (file, options = {}) {
+function runServer (file) {
     return runKarma({
         basePath: '../',
         files: [path.resolve('test/fixtures/' + file)],
@@ -97,10 +87,6 @@ describe('karma-rollup-plugin', () => {
         expect(rollupPlugin['preprocessor:rollup'][1]).to.be.a.function;
     });
 
-    it('should launch karma without issues', () => {
-        runServer('karma.js');
-    });
-
     it('should bundle es2015 modules', () => runFixture('module.js').then(code => {
         expect(code).to.not.contain('//# sourceMappingURL');
     }));
@@ -122,6 +108,8 @@ describe('karma-rollup-plugin', () => {
     }).then(code => {
         expect(code).to.contain('//# sourceMappingURL');
     }));
+
+    it('should launch karma without issues', () => runServer('karma.js'));
 
     // TODO: test karma specific stuff like watching dependency changes
     // touchParents function is weird and buggy
