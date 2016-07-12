@@ -1,12 +1,10 @@
 'use strict';
 
 const { rollup } = require('rollup');
-const { readFileSync } = require('fs');
 const debounce = require('debounce');
 const dependencies = new Map();
 const changedParents = new Set();
 const SOURCEMAPPING_URL = 'sourceMappingURL';
-const pkg = JSON.parse( readFileSync( 'package.json', 'utf-8' ) );
 const WAIT = 25;
 const touchParents = debounce(() => {
     const now = Date.now(); // gives better performance then new Date()
@@ -16,7 +14,7 @@ const touchParents = debounce(() => {
     changedParents.clear();
 }, WAIT);
 
-function createRollupPreprocessor (args, options = {}, logger, helper) {
+function createRollupPreprocessor (args, options = {}, logger) {
     let log = logger.create('preprocessor.rollup');
 
     return (content, file, done) => {
@@ -72,6 +70,6 @@ function createRollupPreprocessor (args, options = {}, logger, helper) {
     };
 }
 
-createRollupPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger', 'helper'];
+createRollupPreprocessor.$inject = ['args', 'config.rollupPreprocessor', 'logger'];
 
 module.exports = { 'preprocessor:rollup': ['factory', createRollupPreprocessor] };
