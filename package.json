@@ -16,7 +16,7 @@
   "files": [
     "src",
     "dist",
-    rollup.conf.js
+    "rollup.conf.js"
   ],
    "repository": {
     "type": "git",
