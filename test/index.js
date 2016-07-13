@@ -109,7 +109,7 @@ describe('karma-rollup-plugin', () => {
         expect(code).to.contain('//# sourceMappingURL');
     }));
 
-    it('should launch karma without issues', () => runServer('karma.js'));
+    it('should launch karma without issues', (done) => { runServer('karma.js'); done(); });
 
     // TODO: test karma specific stuff like watching dependency changes
     // touchParents function is weird and buggy

@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.2.0
+
+- code stability
+- fixed and added more tests
+- removed dead code
+- updated NPM packages
+
 ### 0.1.11
 
 - fixed issue where UMD format was set without module name. 
