@@ -55,6 +55,10 @@ function createRollupPreprocessor (args, options = {}, logger) {
                         code += '\n//# ' + SOURCEMAPPING_URL + '=' + map.toUrl();
                     }
 
+                    if (options.sourceMap) {
+                        file.sourceMap = map;
+                    }
+
                     done(null, code);
                 })
                 .catch(error => {
