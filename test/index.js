@@ -71,7 +71,7 @@ function runFixture (fixture, options = {}) {
         });
     }).then(code => {
         new Function('expect', code)(expect);
-        return code;
+        return { code, file };
     });
 }
 
@@ -87,7 +87,7 @@ describe('karma-rollup-plugin', () => {
         expect(rollupPlugin['preprocessor:rollup'][1]).to.be.a.function;
     });
 
-    it('should bundle es2015 modules', () => runFixture('module.js').then(code => {
+    it('should bundle es2015 modules', () => runFixture('module.js').then(({ code }) => {
         expect(code).to.not.contain('//# sourceMappingURL');
     }));
 
@@ -105,8 +105,18 @@ describe('karma-rollup-plugin', () => {
 
     it('should add inline source map', () => runFixture('es2015.js', {
         sourceMap: 'inline'
-    }).then(code => {
+    }).then(({ code }) => {
         expect(code).to.contain('//# sourceMappingURL');
+    }));
+
+    it('should not add map property in file', () => runFixture('es2015.js').then(({ file }) => {
+        expect(file.sourceMap).not.to.be.ok;
+    }));
+
+    it('should add map property in file with sourceMap = true', () => runFixture('es2015.js', {
+        sourceMap: true
+    }).then(({ file }) => {
+        expect(file.sourceMap).to.be.ok;
     }));
 
     it('should launch karma without issues', (done) => { runServer('karma.js'); done(); });
