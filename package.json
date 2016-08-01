@@ -18,7 +18,7 @@
     "dist",
     "rollup.conf.js"
   ],
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "git@github.com:Kflash/karma-rollup-plugin.git"
   },
@@ -43,7 +43,7 @@
   "devDependencies": {
     "buble": "^0.12.5",
     "chai": "^3.5.0",
-    "eslint": "^2.13.1",
+    "eslint": "^3.2.1",
     "karma": "^1.1.2",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^1.1.1",
