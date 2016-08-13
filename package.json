@@ -1,6 +1,6 @@
 {
   "name": "karma-rollup-plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A Karma preprocessor plugin to offer seamless integration with Rollup",
   "main": "dist/rollup-plugin-karma.js",
   "author": "KFlash",
@@ -44,13 +44,13 @@
     "buble": "^0.13.1",
     "chai": "^3.5.0",
     "eslint": "^2.13.1",
-    "karma": "^1.1.2",
+    "karma": "^1.2.0",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^1.1.1",
     "karma-phantomjs-launcher": "^1.0.1",
     "mocha": "^3.0.2",
     "object-assign": "^4.1.0",
-    "phantomjs-prebuilt": "^2.1.9",
+    "phantomjs-prebuilt": "^2.1.12",
     "rollup-plugin-buble": "^0.12.1"
   }
 }
