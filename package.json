@@ -3,15 +3,11 @@
   "version": "0.2.2",
   "description": "A Karma preprocessor plugin to offer seamless integration with Rollup",
   "main": "dist/rollup-plugin-karma.js",
-  "author": "KFlash",
+  "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint src test/*.js",
-    "build": "rm -rf dist && rollup -c",
-    "pretest": "npm run build",
-    "test": "mocha",
-    "posttest": "npm run lint",
-    "prepublish": "npm test"
+    "pretest": "rollup -c",
+    "test": "mocha test/*.js"
   },
   "files": [
     "src",
@@ -20,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:Kflash/karma-rollup-plugin.git"
+    "url": "git@github.com:TrySound/karma-rollup-plugin.git"
   },
   "keywords": [
     "karma",
@@ -29,21 +25,19 @@
     "modules",
     "es2016",
     "rollup",
-    "buble",
+    "modules",
     "preprocessor"
   ],
   "bugs": {
-    "url": "https://github.com/Kflash/karma-rollup-plugin/issues"
+    "url": "https://github.com/TrySound/karma-rollup-plugin/issues"
   },
-  "homepage": "https://github.com/Kflash/karma-rollup-plugin",
+  "homepage": "https://github.com/TrySound/karma-rollup-plugin",
   "dependencies": {
-    "debounce": "^1.0.0",
     "rollup": "^0.34.1"
   },
   "devDependencies": {
     "buble": "^0.13.1",
     "chai": "^3.5.0",
-    "eslint": "^2.13.1",
     "karma": "^1.2.0",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^1.1.1",
