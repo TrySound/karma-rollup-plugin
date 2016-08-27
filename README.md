@@ -1,14 +1,11 @@
-# karma-rollup-plugin
-
-[![Build Status](https://travis-ci.org/Kflash/karma-rollup-plugin.svg?branch=master)](https://travis-ci.org/Kflash/karma-rollup-plugin)
-[![npm version](https://img.shields.io/npm/v/karma-rollup-plugin.svg)](https://www.npmjs.org/package/karma-rollup-plugin)
+# karma-rollup-plugin [![Build Status](https://travis-ci.org/TrySound/karma-rollup-plugin.svg?branch=master)](https://travis-ci.org/TrySound/karma-rollup-plugin)
 
 > A Karma preprocessor plugin to offer seamless integration with [rollup](http://rollupjs.org/)
 
 This plugin is a Karma preprocessor to compile and bundle your spec entry point on the fly. It works seamless with all Rollup plugins.
 
 # Features
-  
+
   - supports Rollup by default
   - supports both Babel and Buble as the ES2015 compiler
   - sourceMap
