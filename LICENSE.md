@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright (c) 2016 KFlash
+Copyright (c) 2016 Bogdan Chadkin <trysound@yandex.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
