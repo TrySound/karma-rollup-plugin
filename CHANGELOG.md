@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.2.3
+
+* Remove dead code
+
 ### 0.2.0
 
 - code stability
@@ -9,7 +13,7 @@
 
 ### 0.1.11
 
-- fixed issue where UMD format was set without module name. 
+- fixed issue where UMD format was set without module name.
 - added tests
 
 ### 0.1.9
