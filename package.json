@@ -31,10 +31,10 @@
   },
   "homepage": "https://github.com/TrySound/karma-rollup-plugin",
   "dependencies": {
-    "rollup": "^0.34.1"
+    "rollup": "^0.x"
   },
   "devDependencies": {
-    "buble": "^0.13.1",
+    "buble": "^0.14.0",
     "chai": "^3.5.0",
     "karma": "^1.2.0",
     "karma-chai": "^0.1.0",
@@ -43,6 +43,6 @@
     "mocha": "^3.0.2",
     "object-assign": "^4.1.0",
     "phantomjs-prebuilt": "^2.1.12",
-    "rollup-plugin-buble": "^0.12.1"
+    "rollup-plugin-buble": "^0.14.0"
   }
 }
