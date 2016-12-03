@@ -47,8 +47,3 @@ module.exports = function (config) {
 ```
 
 See [Rollup documentation - JavaScript API](https://github.com/rollup/rollup/wiki/JavaScript-API) for more details.
-
-# Why this plugin?
-
-There exist a `karma-rollup-preprocessor` plugin for `Karma`, but it contains too many bugs, and doesn't seem to be maintained atm. 
-This plugin try to stay true to the `Rollup ecosystem`.
