@@ -12,8 +12,8 @@ function createRollupPreprocessor (args, options = {}, logger) {
         try {
             options.entry = file.originalPath;
 
-            rollup(options).then(bundle => {
-                let { code, map } = bundle.generate(options);
+            rollup(options).then(async bundle => {
+                let { code, map } = await bundle.generate(options);
 
                 if (options.sourceMap === 'inline') {
                     code += '\n//# ' + SOURCEMAPPING_URL + '=' + map.toUrl();
